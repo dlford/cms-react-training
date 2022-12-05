@@ -1,0 +1,18 @@
+.comic {
+	font-family: Karla, sans-serif;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	h2 {
+		margin: 0 0 10px;
+		font-family: Montserrat, sans-serif;
+		font-size: 1.125rem;
+		font-weight: 700;
+		color: #222;
+	}
+}
+
+.thumbnail {
+	box-shadow: 0px 5px 15px #00000029;
+}

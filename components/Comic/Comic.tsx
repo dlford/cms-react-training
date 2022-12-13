@@ -11,14 +11,16 @@ export interface ComicComponentProps {
 }
 
 export default function ComicComponent({ comic }: ComicComponentProps) {
-	const { thumbnail, title, issueNumber, publishDate, creators } =
-		comic;
+	const { thumbnail, title, issueNumber, dates, creators } = comic;
 
 	return (
 		<article className={styles.comic}>
 			<Image
 				className={styles.thumbnail}
-				src={thumbnail.replace('http://', 'https://')}
+				src={`${thumbnail.path.replace(
+					'http://',
+					'https://',
+				)}.${thumbnail.extension}`}
 				alt={title}
 				width={183}
 				height={276}
@@ -28,7 +30,7 @@ export default function ComicComponent({ comic }: ComicComponentProps) {
 				<h2>{title}</h2>
 				<ComicDetail
 					issueNumber={issueNumber}
-					publishDate={publishDate}
+					dates={dates}
 					creators={creators}
 				/>
 			</div>

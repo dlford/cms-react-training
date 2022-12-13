@@ -9,15 +9,17 @@ function Label({ children }: { children: string }) {
 
 export interface ComicDetailComponentProps {
 	issueNumber: Comic['issueNumber'];
-	publishDate: Comic['publishDate'];
+	dates: Comic['dates'];
 	creators: Comic['creators'];
 }
 
 export default function ComicDetailComponent({
 	issueNumber,
-	publishDate,
+	dates,
 	creators,
 }: ComicDetailComponentProps) {
+	const pubDate = dates.find(({ type }) => type === 'onsaleDate');
+
 	return (
 		<ul className={styles.comicDetail}>
 			<li>
@@ -26,18 +28,26 @@ export default function ComicDetailComponent({
 			<li>
 				<Label>Published:</Label>
 				<br />
-				<time dateTime={new Date(publishDate).toISOString()}>
-					{new Date(publishDate).toLocaleString('en-US', {
-						month: 'long',
-						day: 'numeric',
-						year: 'numeric',
-					})}
-				</time>
+				{!!pubDate?.date && (
+					<time
+						dateTime={new Date(pubDate.date).toISOString()}
+					>
+						{new Date(pubDate.date).toLocaleString(
+							'en-US',
+							{
+								month: 'long',
+								day: 'numeric',
+								year: 'numeric',
+							},
+						)}
+					</time>
+				)}
 			</li>
 			<li>
 				<Label>Creators:</Label>
 				<br />
-				{creators.map(({ name }) => name).join(', ')}
+				{!!creators.items.length &&
+					creators.items.map(({ name }) => name).join(', ')}
 			</li>
 		</ul>
 	);

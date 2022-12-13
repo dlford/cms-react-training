@@ -1,11 +1,17 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ComicComponent from '../components/Comic';
-import comics from '../data/comics.json';
+import useMarvel from '../hooks/useMarvel';
 import { Comic } from '../types/Comic';
 
 export default function Home() {
+	const { loading, error, data, getComics } = useMarvel();
+
+	useEffect(() => {
+		getComics();
+	}, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+
 	return (
 		<div>
 			<Head>
@@ -30,13 +36,22 @@ export default function Home() {
 					justifyContent: 'center',
 				}}
 			>
-				{comics.map((comic: Comic) => (
-					<ComicComponent
-						key={comic.id}
-						comic={comic}
-					/>
-				))}
+				{loading && <p>Loading...</p>}
+				{error && <p>Error</p>}
+				{!loading &&
+					!error &&
+					!!data?.results &&
+					data.results.map((comic: Comic) => (
+						<ComicComponent
+							key={comic.id}
+							comic={comic}
+						/>
+					))}
 			</main>
+
+			<footer>
+				<p>Data provided by Marvel. © 2014 Marvel</p>
+			</footer>
 		</div>
 	);
 }

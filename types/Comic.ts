@@ -4,7 +4,12 @@ export type Comic = {
 	id: number;
 	title: string;
 	issueNumber: number;
-	publishDate: string;
-	creators: Creator[];
-	thumbnail: string;
+	dates: [{ type: string; date: string }];
+	creators: {
+		items: Creator[];
+	};
+	thumbnail: {
+		extension: string;
+		path: string;
+	};
 };

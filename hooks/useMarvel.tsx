@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
+import type { GetComicsResponse } from '../types/GetComicsResponse';
+
+type MarvelData = GetComicsResponse;
+
 export default function useMarvel() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
-	const [data, setData] = useState<any>();
+	const [data, setData] = useState<MarvelData>();
 
 	function getComics(args?: { [key: string]: string }) {
 		setLoading(true);

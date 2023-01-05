@@ -7,6 +7,7 @@ export const favoritesContext = createContext({
 	addFavorite: (_comic: Comic) => {},
 	removeFavorite: (_comic: Comic) => {},
 	isFavorite: (_comic: Comic): boolean => false,
+	countFavorites: (): number => 0,
 });
 
 export function FavoritesProvider({
@@ -30,8 +31,18 @@ export function FavoritesProvider({
 		return favorites.some((item) => item.id === comic.id);
 	}
 
+	function countFavorites() {
+		return favorites.length;
+	}
+
 	const value = useMemo(
-		() => ({ favorites, addFavorite, removeFavorite, isFavorite }),
+		() => ({
+			favorites,
+			addFavorite,
+			removeFavorite,
+			isFavorite,
+			countFavorites,
+		}),
 		[favorites], // eslint-disable-line react-hooks/exhaustive-deps
 	);
 

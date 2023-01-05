@@ -4,6 +4,9 @@ const nextConfig = {
 	swcMinify: true,
 	images: {
 		domains: ['i.annihil.us'],
+		dangerouslyAllowSVG: true,
+		contentSecurityPolicy:
+			"default-src 'self'; script-src 'none'; sandbox;",
 	},
 };
 

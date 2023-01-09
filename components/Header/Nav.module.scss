@@ -39,9 +39,7 @@
 	}
 
 	@media (min-width: 1024px) {
-		& {
-			display: none;
-		}
+		display: none;
 	}
 }
 
@@ -70,9 +68,7 @@
 	}
 
 	@media (min-width: 1024px) {
-		& {
-			display: flex;
-			gap: 30px;
-		}
+		display: flex;
+		gap: 30px;
 	}
 }

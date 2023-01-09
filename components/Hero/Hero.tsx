@@ -9,6 +9,7 @@ export default function Hero() {
 	return (
 		<section className={styles.hero}>
 			<Image
+				priority
 				className={styles.heroImg}
 				src={heroImg}
 				alt=''
@@ -17,6 +18,7 @@ export default function Hero() {
 				height={867}
 			/>
 			<Image
+				priority
 				className={styles.heroTexture}
 				src={heroTexture}
 				alt=''

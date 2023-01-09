@@ -2,8 +2,10 @@ import Head from 'next/head';
 import React /* , { useEffect } */ from 'react';
 
 import ComicComponent from '../components/Comic';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import Intro from '../components/Intro';
 // import useMarvel from '../hooks/useMarvel';
 import { Comic } from '../types/Comic';
 
@@ -37,6 +39,8 @@ export default function Home() {
 			<main>
 				<Hero />
 
+				<Intro />
+
 				<section
 					style={{
 						display: 'grid',
@@ -61,9 +65,7 @@ export default function Home() {
 				</section>
 			</main>
 
-			<footer>
-				<p>Data provided by Marvel. © 2014 Marvel</p>
-			</footer>
+			<Footer />
 		</div>
 	);
 }

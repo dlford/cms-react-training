@@ -2,6 +2,7 @@
 	position: relative;
 	aspect-ratio: 375 / 450;
 	z-index: 1;
+	margin-bottom: 42px;
 
 	&:after {
 		content: '';
@@ -16,9 +17,8 @@
 	}
 
 	@media (min-width: 1024px) {
-		& {
-			aspect-ratio: 1440 / 650;
-		}
+		aspect-ratio: 1440 / 650;
+		margin-bottom: 86px;
 
 		&:after {
 			height: 179px;
@@ -44,10 +44,8 @@
 	object-fit: cover;
 
 	@media (min-width: 1024px) {
-		& {
-			bottom: -10px;
-			height: 176px;
-		}
+		bottom: -10px;
+		height: 176px;
 	}
 }
 

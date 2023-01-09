@@ -1,25 +1,13 @@
 import Head from 'next/head';
-import React /* , { useEffect } */ from 'react';
+import React from 'react';
 
-import ComicComponent from '../components/Comic';
+import ComicList from '../components/ComicList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Intro from '../components/Intro';
-// import useMarvel from '../hooks/useMarvel';
-import { Comic } from '../types/Comic';
 
 export default function Home() {
-	const loading = false;
-	const error = false;
-	const data = { results: [] as Comic[] };
-	/*
-	const { loading, error, data, getComics } = useMarvel();
-
-	useEffect(() => {
-		getComics();
-	}, []); /* eslint-disable-line react-hooks/exhaustive-deps */
-
 	return (
 		<div>
 			<Head>
@@ -33,38 +21,12 @@ export default function Home() {
 					href='/favicon.ico'
 				/>
 			</Head>
-
 			<Header />
-
 			<main>
 				<Hero />
-
 				<Intro />
-
-				<section
-					style={{
-						display: 'grid',
-						gridTemplateColumns:
-							'repeat(auto-fill, minmax(183px, auto))',
-						gridColumnGap: 20,
-						gridRowGap: 60,
-						justifyContent: 'center',
-					}}
-				>
-					{loading && <p>Loading...</p>}
-					{error && <p>Error</p>}
-					{!loading &&
-						!error &&
-						!!data?.results &&
-						data.results.map((comic: Comic) => (
-							<ComicComponent
-								key={comic.id}
-								comic={comic}
-							/>
-						))}
-				</section>
+				<ComicList />
 			</main>
-
 			<Footer />
 		</div>
 	);

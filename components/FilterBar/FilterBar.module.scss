@@ -1,0 +1,12 @@
+.mobile {
+	@media (min-width: 1024px) {
+		display: none;
+	}
+}
+
+.desktop {
+	display: none;
+	@media (min-width: 1024px) {
+		display: block;
+	}
+}

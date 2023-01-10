@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
+import useFilter from '../contexts/filter';
 import type { GetComicsResponse } from '../types/GetComicsResponse';
 
 type MarvelData = GetComicsResponse;
 
 export default function useMarvel() {
+	const { creatorFilter, characterFilter } = useFilter();
+
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [data, setData] = useState<MarvelData>();
@@ -13,10 +16,21 @@ export default function useMarvel() {
 		setLoading(true);
 		setError(false);
 
-		const url = new URL(
-			'/api/marvel/comics',
-			window.location.origin,
-		);
+		let url = new URL('/api/marvel/comics', window.location.origin);
+
+		if (creatorFilter) {
+			url = new URL(
+				`/api/marvel/creators/${creatorFilter}/comics`,
+				window.location.origin,
+			);
+		}
+
+		if (characterFilter) {
+			url = new URL(
+				`/api/marvel/characters/${characterFilter}/comics`,
+				window.location.origin,
+			);
+		}
 
 		if (args) {
 			Object.entries(args).forEach(([key, value]) => {

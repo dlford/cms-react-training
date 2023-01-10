@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 
+import useFilter from '../../contexts/filter';
 import useMarvel from '../../hooks/useMarvel';
 import { Comic } from '../../types/Comic';
 import ComicComponent from '../Comic';
@@ -8,19 +10,40 @@ import styles from './ComicList.module.scss';
 
 export default function ComicList() {
 	const { loading, error, data, getComics } = useMarvel();
+	const { characterFilter, creatorFilter } = useFilter();
+
+	const loadingBar = useRef<LoadingBarRef>(null);
 
 	useEffect(() => {
 		getComics();
-	}, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+	}, [
+		characterFilter,
+		creatorFilter,
+	]); /* eslint-disable-line react-hooks/exhaustive-deps */
+
+	useEffect(() => {
+		if (loadingBar.current) {
+			if (loading) {
+				loadingBar.current.continuousStart();
+			} else {
+				loadingBar.current.complete();
+			}
+		}
+	}, [loading, loadingBar]);
 
 	return (
 		<section>
+			<LoadingBar
+				color='#C24868'
+				ref={loadingBar}
+			/>
 			<FilterBar />
-			<div className={styles.comics}>
-				{loading && <p>Loading...</p>}
+			<div
+				aria-busy={loading}
+				className={styles.comics}
+			>
 				{error && <p>Error</p>}
-				{!loading &&
-					!error &&
+				{!error &&
 					!!data?.results &&
 					data.results.map((comic: Comic) => (
 						<ComicComponent

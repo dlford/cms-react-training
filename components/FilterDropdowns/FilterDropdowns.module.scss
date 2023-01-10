@@ -1,0 +1,27 @@
+.dropdowns {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	span {
+		font-size: 14px;
+		font-weight: 700;
+		color: #f8f8f2;
+	}
+
+	select {
+		background-color: #222222;
+		color: #f8f8f2;
+		border: 1px solid #8b8b8b;
+		border-radius: 3px;
+		padding: 10px 5px;
+		border-radius: 5px;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	@media (min-width: 1024px) {
+		flex-direction: row;
+		align-items: center;
+	}
+}

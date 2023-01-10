@@ -9,11 +9,14 @@ import type { AppProps } from 'next/app';
 import React from 'react';
 
 import { FavoritesProvider } from '../contexts/favorites';
+import { FilterProvider } from '../contexts/filter';
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<FavoritesProvider>
-			<Component {...pageProps} />
-		</FavoritesProvider>
+		<FilterProvider>
+			<FavoritesProvider>
+				<Component {...pageProps} />
+			</FavoritesProvider>
+		</FilterProvider>
 	);
 }

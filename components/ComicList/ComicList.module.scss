@@ -14,12 +14,13 @@
 .favoritesOuter {
 	display: none;
 	@media (min-width: 1024px) {
+		flex: 1 1 265px;
 		display: block;
 	}
 }
 
 .comicsOuter {
-	flex: 1 1 100%;
+	flex: 1 1 995px;
 }
 
 .comics {
@@ -30,7 +31,7 @@
 
 	@media (min-width: 640px) {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(183px, auto));
+		grid-template-columns: repeat(auto-fill, minmax(170px, auto));
 		grid-column-gap: 20px;
 		grid-row-gap: 30px;
 		grid-row-gap: 60px;

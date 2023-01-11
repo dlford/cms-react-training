@@ -17,6 +17,9 @@
 		display: flex;
 		gap: 10px;
 		margin-bottom: 46px;
+		@media (min-width: 1024px) {
+			margin-bottom: 26px;
+		}
 
 		.imgCont {
 			position: relative;
@@ -55,6 +58,7 @@
 			flex: 1 1 100%;
 
 			h3 {
+				font-family: Karla, sans-serif;
 				margin: 0 0 4px;
 				font-size: 0.875rem;
 				font-weight: 700;

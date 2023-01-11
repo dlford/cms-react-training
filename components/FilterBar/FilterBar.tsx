@@ -83,6 +83,21 @@ export default function FilterBar() {
 			<div className={overlayClass}>
 				{filterOpen && <FilterDropdowns />}
 				{favoritesOpen && <FavoritesList />}
+				<button
+					className={styles.closeButton}
+					type='button'
+					name={
+						filterOpen
+							? buttonNames.filterButton
+							: buttonNames.favoritesButton
+					}
+					onClick={toggleOverlay}
+				>
+					Hide {filterOpen ? 'Filter' : 'Favorites'}{' '}
+					<FontAwesomeIcon
+						icon={filterOpen ? faFilter : faBoltLightning}
+					/>
+				</button>
 			</div>
 			<div className={styles.desktop}>
 				<FilterDropdowns />

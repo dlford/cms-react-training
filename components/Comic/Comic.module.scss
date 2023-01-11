@@ -1,18 +1,70 @@
 .comic {
 	font-family: Karla, sans-serif;
 	display: flex;
-	flex-direction: column;
+	flex-flow: row-reverse;
+	justify-content: space-between;
 	gap: 1rem;
 
 	h2 {
 		margin: 0 0 10px;
 		font-family: Montserrat, sans-serif;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		font-weight: 700;
 		color: #222;
+	}
+
+	@media (min-width: 640px) {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+
+		h2 {
+			font-size: 1.125rem;
+		}
+	}
+}
+
+.imgCont {
+	position: relative;
+
+	@media (min-width: 640px) {
+		margin: 0;
+		width: 100%;
+		height: auto;
+		display: flex;
+		justify-content: stretch;
 	}
 }
 
 .thumbnail {
 	box-shadow: 0px 5px 15px #00000029;
+	max-width: 125px;
+	height: auto;
+	aspect-ratio: 125 / 188;
+
+	@media (min-width: 640px) {
+		aspect-ratio: 183 / 276;
+		width: 100%;
+		max-width: 256px;
+	}
+}
+
+.button {
+	position: absolute;
+	top: 50%;
+	left: -15px;
+	transform: translateY(-50%);
+
+	@media (min-width: 640px) {
+		top: unset;
+		bottom: -15px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.textContent {
+	@media (min-width: 640px) {
+		margin-top: 15px;
+	}
 }

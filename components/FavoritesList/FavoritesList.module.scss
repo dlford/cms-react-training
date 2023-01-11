@@ -1,2 +1,71 @@
 .favorites {
+	padding: 0 20px;
+	background-color: #222222;
+	color: #f8f8f2;
+	@media (min-width: 1024px) {
+		padding: 30px 30px 1px;
+	}
+
+	.title {
+		font-size: 1.5625rem;
+		letter-spacing: 0.25px;
+		font-weight: 900;
+		margin: 0 0 47px;
+	}
+
+	.comic {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 46px;
+
+		.imgCont {
+			position: relative;
+
+			img {
+				max-width: 50px;
+				aspect-ratio: 50 / 75;
+				height: auto;
+			}
+
+			button {
+				position: absolute;
+				top: -17px;
+				left: -17px;
+				width: 35px;
+				height: 35px;
+				background-color: #f8f8f2;
+				border-color: #f8f8f2;
+				color: #c24868;
+				opacity: 0.8;
+
+				@media (min-width: 1024px) {
+					top: -6px;
+					left: -6px;
+					padding: 0;
+					width: 12px;
+					height: 12px;
+					svg {
+						width: 6px;
+					}
+				}
+			}
+		}
+
+		.textContent {
+			flex: 1 1 100%;
+
+			h3 {
+				margin: 0 0 4px;
+				font-size: 0.875rem;
+				font-weight: 700;
+			}
+
+			p {
+				font-family: Karla, sans-serif;
+				margin: 0;
+				font-size: 0.875rem;
+				font-weight: 400;
+			}
+		}
+	}
 }

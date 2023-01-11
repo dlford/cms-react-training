@@ -1,7 +1,38 @@
+.list {
+	margin: 0 20px 60px;
+
+	@media (min-width: 1024px) {
+		margin: 0 60px 90px;
+	}
+}
+
+.listInner {
+	display: flex;
+	gap: 60px;
+}
+
+.favoritesOuter {
+	display: none;
+	@media (min-width: 1024px) {
+		display: block;
+	}
+}
+
+.comicsOuter {
+	flex: 1 1 100%;
+}
+
 .comics {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(183px, auto));
-	grid-column-gap: 20;
-	grid-row-gap: 60;
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	gap: 30px;
+
+	@media (min-width: 640px) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(183px, auto));
+		grid-column-gap: 20px;
+		grid-row-gap: 30px;
+		grid-row-gap: 60px;
+	}
 }

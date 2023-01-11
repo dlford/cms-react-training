@@ -93,3 +93,14 @@ rules:
     jsx-a11y/label-has-associated-control:
         - error
         - assert: either
+    no-restricted-imports:
+        - error
+        - paths:
+              - name: react
+                importNames:
+                    - useLayoutEffect
+                message: Use `useIsomorphicLayoutEffect` instead.
+    no-restricted-syntax:
+        - error
+        - selector: 'ImportDeclaration[source.value=/use-isomorphic-layout-effect/] > ImportDefaultSpecifier[local.name!="useLayoutEffect"]'
+          message: Must use `useLayoutEffect` as the name of the import from `useIsomorphicLayoutEffect` to leverage `eslint-plugin-react-hooks

@@ -5,6 +5,7 @@ import useFilter from '../../contexts/filter';
 import useMarvel from '../../hooks/useMarvel';
 import { Comic } from '../../types/Comic';
 import ComicComponent from '../Comic';
+import FavoritesList from '../FavoritesList';
 import FilterBar from '../FilterBar';
 import styles from './ComicList.module.scss';
 
@@ -16,10 +17,8 @@ export default function ComicList() {
 
 	useEffect(() => {
 		getComics();
-	}, [
-		characterFilter,
-		creatorFilter,
-	]); /* eslint-disable-line react-hooks/exhaustive-deps */
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	}, [characterFilter, creatorFilter]);
 
 	useEffect(() => {
 		if (loadingBar.current) {
@@ -32,26 +31,35 @@ export default function ComicList() {
 	}, [loading, loadingBar]);
 
 	return (
-		<section>
+		<>
 			<LoadingBar
 				color='#C24868'
 				ref={loadingBar}
 			/>
-			<FilterBar />
-			<div
-				aria-busy={loading}
-				className={styles.comics}
-			>
-				{error && <p>Error</p>}
-				{!error &&
-					!!data?.results &&
-					data.results.map((comic: Comic) => (
-						<ComicComponent
-							key={comic.id}
-							comic={comic}
-						/>
-					))}
-			</div>
-		</section>
+			<section className={styles.list}>
+				<div className={styles.listInner}>
+					<div className={styles.comicsOuter}>
+						<FilterBar />
+						<article
+							aria-busy={loading}
+							className={styles.comics}
+						>
+							{error && <p>Error</p>}
+							{!error &&
+								!!data?.results &&
+								data.results.map((comic: Comic) => (
+									<ComicComponent
+										key={comic.id}
+										comic={comic}
+									/>
+								))}
+						</article>
+					</div>
+					<div className={styles.favoritesOuter}>
+						<FavoritesList />
+					</div>
+				</div>
+			</section>
+		</>
 	);
 }

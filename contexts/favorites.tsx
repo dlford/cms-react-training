@@ -1,12 +1,13 @@
-import React, { createContext, useMemo, useState } from 'react';
+import React, { createContext, useMemo } from 'react';
 
+import useLocalState from '../hooks/useLocalState';
 import { Comic } from '../types/Comic';
 
 export const favoritesContext = createContext({
 	favorites: [] as Comic[],
 	addFavorite: (_comic: Comic) => {},
 	removeFavorite: (_comic: Comic) => {},
-	isFavorite: (_comic: Comic): boolean => false,
+	checkIfFavorite: (_comic: Comic): boolean => false,
 	countFavorites: (): number => 0,
 });
 
@@ -15,7 +16,10 @@ export function FavoritesProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const [favorites, setFavorites] = useState<Comic[]>([]);
+	const [favorites, setFavorites] = useLocalState<Comic[]>({
+		key: 'favorites',
+		defaultValue: [],
+	});
 
 	function addFavorite(comic: Comic) {
 		setFavorites((prev) => [...prev, comic]);
@@ -27,7 +31,7 @@ export function FavoritesProvider({
 		);
 	}
 
-	function isFavorite(comic: Comic) {
+	function checkIfFavorite(comic: Comic) {
 		return favorites.some((item) => item.id === comic.id);
 	}
 
@@ -40,7 +44,7 @@ export function FavoritesProvider({
 			favorites,
 			addFavorite,
 			removeFavorite,
-			isFavorite,
+			checkIfFavorite,
 			countFavorites,
 		}),
 		[favorites], // eslint-disable-line react-hooks/exhaustive-deps

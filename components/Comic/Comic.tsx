@@ -14,7 +14,7 @@ export interface ComicComponentProps {
 export default function ComicComponent({ comic }: ComicComponentProps) {
 	const { thumbnail, title, issueNumber, dates, creators } = comic;
 
-	const { checkIfFavorite, addFavorite, removeFavorite } =
+	const { checkIfFavorite, addFavorite, removeFavorite, isMaxedOut } =
 		useFavorites();
 
 	function toggleFavorite() {
@@ -40,6 +40,7 @@ export default function ComicComponent({ comic }: ComicComponentProps) {
 				/>
 				<div className={styles.button}>
 					<IconButton
+						disabled={isMaxedOut && !checkIfFavorite(comic)}
 						aria-label={`${
 							checkIfFavorite(comic)
 								? 'Remove from'

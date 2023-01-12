@@ -10,8 +10,8 @@ import useFavorites from '../../contexts/favorites';
 import styles from './Nav.module.scss';
 
 export default function Nav() {
-	const { countFavorites } = useFavorites();
-	const count = countFavorites();
+	const { favorites } = useFavorites();
+	const count = favorites.length;
 
 	return (
 		<div className={styles.nav}>

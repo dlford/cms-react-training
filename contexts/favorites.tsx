@@ -1,4 +1,9 @@
-import React, { createContext, useMemo } from 'react';
+import React, {
+	createContext,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 
 import useLocalState from '../hooks/useLocalState';
 import { Comic } from '../types/Comic';
@@ -8,7 +13,7 @@ export const favoritesContext = createContext({
 	addFavorite: (_comic: Comic) => {},
 	removeFavorite: (_comic: Comic) => {},
 	checkIfFavorite: (_comic: Comic): boolean => false,
-	countFavorites: (): number => 0,
+	isMaxedOut: false,
 });
 
 export function FavoritesProvider({
@@ -21,8 +26,12 @@ export function FavoritesProvider({
 		defaultValue: [],
 	});
 
+	const [isMaxedOut, setIsMaxedOut] = useState<boolean>(false);
+
 	function addFavorite(comic: Comic) {
-		setFavorites((prev) => [...prev, comic]);
+		if (!isMaxedOut) {
+			setFavorites((prev) => [...prev, comic]);
+		}
 	}
 
 	function removeFavorite(comic: Comic) {
@@ -35,9 +44,14 @@ export function FavoritesProvider({
 		return favorites.some((item) => item.id === comic.id);
 	}
 
-	function countFavorites() {
-		return favorites.length;
-	}
+	useEffect(() => {
+		if (favorites.length >= 10) {
+			setIsMaxedOut(true);
+		} else {
+			setIsMaxedOut(false);
+		}
+		/* eslint-disable-next-line react-hooks/exhaustive-deps */
+	}, [favorites]);
 
 	const value = useMemo(
 		() => ({
@@ -45,9 +59,9 @@ export function FavoritesProvider({
 			addFavorite,
 			removeFavorite,
 			checkIfFavorite,
-			countFavorites,
+			isMaxedOut,
 		}),
-		[favorites], // eslint-disable-line react-hooks/exhaustive-deps
+		[favorites, isMaxedOut], // eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	return (
